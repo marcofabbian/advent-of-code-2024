@@ -63,8 +63,36 @@ fun main() {
         return appearences
     }
 
+    fun checkForX(row: Int, column: Int, word: String, input: List<String>): Int {
+        var appearances = 0
+        val wordSize = word.length-1
+        if(input[row][column] == word[1]) {
+            if(row-1 >= 0 && column -1 >=0 && row+1 < input.size && column + 1 < input[row].length) {
+                if(
+                    ((input[row-1][column-1] == word[0] &&  input[row+1][column+1] == word[2])
+                    ||
+                    (input[row-1][column-1] == word[2] &&  input[row+1][column+1] == word[0]))
+                    &&
+                    ((input[row-1][column+1] == word[0] &&  input[row+1][column-1] == word[2])
+                    ||
+                    (input[row-1][column+1] == word[2] &&  input[row+1][column-1] == word[0]))) {
+                        appearances++
+                    }
+                }
+            }
+        return appearances
+    }
+
     fun part2(input: List<String>): Int {
-        return input.size
+        val word = "MAS"
+        var appearences = 0
+        for(i in 0..input.size-1){
+            for(j in 0..input[i].length-1){
+                appearences += checkForX(i, j, word, input)
+            }
+        }
+
+        return appearences
     }
 
     // Read the input from the `src/Day01.txt` file.
