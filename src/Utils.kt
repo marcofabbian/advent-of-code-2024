@@ -19,3 +19,28 @@ fun String.md5() = BigInteger(1, MessageDigest.getInstance("MD5").digest(toByteA
  * The cleaner shorthand for printing output.
  */
 fun Any?.println() = println(this)
+
+fun List<String>.subStringVertical(column:Int, start:Int, end:Int):String {
+    var subString = ""
+    for(i in start..end){
+        subString += this[i][column]
+    }
+    return subString
+}
+
+fun List<String>.subStringDiagonal(row:Int, column:Int, rowEnd:Int, columnEnd:Int): String {
+    var subString = ""
+    var i = row
+    var j = column
+    if(i < rowEnd && j < columnEnd) {
+        while (i < rowEnd && j < columnEnd) {
+            subString += this[i++][j++]
+        }
+    } else {
+        while (i > rowEnd && j < columnEnd) {
+            subString += this[i--][j++]
+        }
+    }
+
+    return subString
+}
